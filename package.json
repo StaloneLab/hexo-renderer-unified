@@ -1,0 +1,32 @@
+{
+  "name": "hexo-renderer-unified",
+  "version": "0.1.0",
+  "description": "Markdown renderer plugin for Hexo - based on Unified",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TitiAlone/hexo-renderer-unified.git"
+  },
+  "keywords": [
+    "hexo",
+    "markdown",
+    "unified",
+    "renderer"
+  ],
+  "author": "TAlone <titi_alone@gmx.fr>",
+  "license": "LGPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/TitiAlone/hexo-renderer-unified/issues"
+  },
+  "homepage": "https://github.com/TitiAlone/hexo-renderer-unified#readme",
+  "dependencies": {
+    "rehype-format": "^2.3.1",
+    "rehype-stringify": "^5.0.0",
+    "remark-parse": "^6.0.3",
+    "remark-rehype": "^4.0.0",
+    "unified": "^7.1.0"
+  }
+}
