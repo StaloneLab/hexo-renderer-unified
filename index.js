@@ -12,7 +12,7 @@ const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
 
 const engine = unified()
-	.use(markdown)
+	.use(markdown, { gfm: true, commonmark: false, pedantic: false })
 	.use(remarkMath)
 	.use(remark2rehype)
 	.use(highlight, { ignoreMissing: true })
