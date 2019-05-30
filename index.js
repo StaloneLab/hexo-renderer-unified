@@ -4,13 +4,19 @@
 
 const unified = require("unified");
 const markdown = require("remark-parse");
+const remarkMath = require("remark-math");
 const remark2rehype = require("remark-rehype");
+const highlight = require("rehype-highlight");
+const rehypeMath = require("rehype-katex");
 const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
 
 const engine = unified()
 	.use(markdown)
+	.use(remarkMath)
 	.use(remark2rehype)
+	.use(highlight, { ignoreMissing: true })
+	.use(rehypeMath)
 	.use(htmlFormat)
 	.use(html);
 

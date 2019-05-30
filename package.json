@@ -1,6 +1,6 @@
 {
   "name": "hexo-renderer-unified",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Markdown renderer plugin for Hexo - based on Unified",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,10 @@
   "homepage": "https://github.com/TitiAlone/hexo-renderer-unified#readme",
   "dependencies": {
     "rehype-format": "^2.3.1",
+    "rehype-highlight": "^2.2.1",
+    "rehype-katex": "^1.2.0",
     "rehype-stringify": "^5.0.0",
+    "remark-math": "^1.0.6",
     "remark-parse": "^6.0.3",
     "remark-rehype": "^4.0.0",
     "unified": "^7.1.0"
