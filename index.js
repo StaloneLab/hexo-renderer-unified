@@ -14,11 +14,11 @@ const html = require("rehype-stringify");
 const engine = unified()
 	.use(markdown, { gfm: true, commonmark: false, pedantic: false })
 	.use(remarkMath)
-	.use(remark2rehype)
+	.use(remark2rehype, { allowDangerousHTML: true })
 	.use(highlight, { ignoreMissing: true })
 	.use(rehypeMath)
-	.use(htmlFormat)
-	.use(html);
+	.use(html)
+	.use(htmlFormat);
 
 function renderer(data, options) {
 	return String(engine.processSync(data.text));
