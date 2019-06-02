@@ -8,6 +8,7 @@ const remarkMath = require("remark-math");
 const remark2rehype = require("remark-rehype");
 const highlight = require("rehype-highlight");
 const rehypeMath = require("rehype-katex");
+const rehypeLineNumbers = require("./utils/rehype-line-numbers");
 const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
 
@@ -17,8 +18,9 @@ const engine = unified()
 	.use(remark2rehype, { allowDangerousHTML: true })
 	.use(highlight, { ignoreMissing: true })
 	.use(rehypeMath)
-	.use(html)
-	.use(htmlFormat);
+	.use(rehypeLineNumbers)
+	.use(htmlFormat)
+	.use(html);
 
 function renderer(data, options) {
 	return String(engine.processSync(data.text));
