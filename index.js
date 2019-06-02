@@ -16,9 +16,9 @@ const engine = unified()
 	.use(markdown, { gfm: true, commonmark: false, pedantic: false })
 	.use(remarkMath)
 	.use(remark2rehype, { allowDangerousHTML: true })
-	.use(highlight, { ignoreMissing: true })
 	.use(rehypeMath)
 	.use(rehypeLineNumbers)
+	.use(highlight, { ignoreMissing: true })
 	.use(htmlFormat)
 	.use(html);
 

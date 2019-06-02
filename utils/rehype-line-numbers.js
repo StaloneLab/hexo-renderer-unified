@@ -1,5 +1,7 @@
-/* Many thanks to vhf for this package
+/* Many thanks to vhf for this package,
    originating from https://github.com/zestedesavoir/zmarkdown/blob/master/packages/zmarkdown/utils/rehype-line-numbers.js */
+
+/* Changes have been made to add line numbers directly using the module */
 
 const visit = require('unist-util-visit')
 
@@ -17,12 +19,17 @@ const lineNumbersDiv = (children) => ({
   children,
 })
 
-const lineNumber = {
+const lineNumber = (count) => ({
   type: 'element',
   tagName: 'span',
   properties: {},
-  children: [],
-}
+  children: [
+    {
+      type: 'text',
+      value: '' + count + '',
+    }
+  ],
+})
 
 const rehypeLineNumbers = () => (tree) => {
   visit(tree, 'element', (node, index, parent) => {
@@ -38,7 +45,7 @@ const rehypeLineNumbers = () => (tree) => {
     const lines = source.split('\n').slice(0, -1)
 
     const columnNodes = [
-      lineNumbersDiv(lines.map(() => lineNumber)),
+      lineNumbersDiv(lines.map((_, i) => lineNumber(i + 1))),
       preNode,
     ]
 
