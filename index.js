@@ -12,14 +12,26 @@ const rehypeLineNumbers = require("./utils/rehype-line-numbers");
 const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
 
+const config = Object.assign({
+	math: false,
+	code: true,
+	code_ln: false,
+}, hexo.config.unified);
+
 const engine = unified()
-	.use(markdown, { gfm: true, commonmark: false, pedantic: false })
-	.use(remarkMath)
-	.use(remark2rehype, { allowDangerousHTML: true })
-	.use(rehypeMath)
-	.use(rehypeLineNumbers)
-	.use(highlight, { ignoreMissing: true })
-	.use(htmlFormat)
+	.use(markdown, { gfm: true, commonmark: false, pedantic: false });
+
+if(config.math) engine.use(remarkMath);
+
+engine.use(remark2rehype, { allowDangerousHTML: true });
+
+if(config.math) engine.use(rehypeMath);
+
+if(config.code && config.code_ln) engine.use(rehypeLineNumbers);
+
+if(config.code) engine.use(highlight, { ignoreMissing: true });
+	
+engine.use(htmlFormat)
 	.use(html);
 
 function renderer(data, options) {
