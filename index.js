@@ -25,7 +25,7 @@ const engine = unified()
 
 if(config.math) engine.use(remarkMath);
 
-engine.use(remark2rehype, { allowDangerousHTML: true });
+engine.use(remark2rehype, { allowDangerousHTML: true, handlers: { excerptDelimitor: remark2rehypeHexoMoreHandler } });
 
 if(config.math) engine.use(rehypeMath);
 
@@ -38,6 +38,16 @@ engine.use(htmlFormat)
 
 function renderer(data) {
 	return String(engine.processSync(data.text));
+}
+
+function remark2rehypeHexoMoreHandler(h, node) {
+	const newNode = h(node);
+	newNode.type = "comment";
+	newNode.value = "more";
+
+	delete newNode.tagName;
+
+	return newNode;
 }
 
 if(typeof hexo !== "undefined") {
