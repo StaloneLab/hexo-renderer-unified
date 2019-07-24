@@ -1,6 +1,6 @@
 const HEXO_EXCERPT_DELIMITOR = "<+++>";
 
-module.exports = () => {
+module.exports = function() {
 	function locator(value, fromIndex) {
 		return value.indexOf(HEXO_EXCERPT_DELIMITOR, fromIndex);
 	}
