@@ -4,6 +4,7 @@
 
 const unified = require("unified");
 const markdown = require("remark-parse");
+const remarkHexoMore = require("./utils/rehype-hexo-more");
 const remarkMath = require("remark-math");
 const remark2rehype = require("remark-rehype");
 const highlight = require("rehype-highlight");
@@ -19,7 +20,8 @@ const config = Object.assign({
 }, hexo.config.unified);
 
 const engine = unified()
-	.use(markdown, { gfm: true, commonmark: false, pedantic: false });
+	.use(markdown, { gfm: true, commonmark: false, pedantic: false })
+	.use(remarkHexoMore);
 
 if(config.math) engine.use(remarkMath);
 
@@ -34,14 +36,18 @@ if(config.code) engine.use(highlight, { ignoreMissing: true });
 engine.use(htmlFormat)
 	.use(html);
 
-function renderer(data, options) {
+function renderer(data) {
 	return String(engine.processSync(data.text));
 }
 
-hexo.extend.renderer.register("md", "html", renderer, true);
-hexo.extend.renderer.register("markdown", "html", renderer, true);
-hexo.extend.renderer.register("mkd", "html", renderer, true);
-hexo.extend.renderer.register("mkdn", "html", renderer, true);
-hexo.extend.renderer.register("mdwn", "html", renderer, true);
-hexo.extend.renderer.register("mdtxt", "html", renderer, true);
-hexo.extend.renderer.register("mdtext", "html", renderer, true);
+if(typeof hexo !== "undefined") {
+	hexo.extend.renderer.register("md", "html", renderer, true);
+	hexo.extend.renderer.register("markdown", "html", renderer, true);
+	hexo.extend.renderer.register("mkd", "html", renderer, true);
+	hexo.extend.renderer.register("mkdn", "html", renderer, true);
+	hexo.extend.renderer.register("mdwn", "html", renderer, true);
+	hexo.extend.renderer.register("mdtxt", "html", renderer, true);
+	hexo.extend.renderer.register("mdtext", "html", renderer, true);
+}
+
+module.exports = renderer;
