@@ -14,13 +14,23 @@ const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
 
 const config = Object.assign({
+	gfm: true,
+	pedantic: false,
+	commonmark: false,
+	footnotes: true,
 	math: false,
-	code: true,
+	code: false,
 	code_ln: false,
+	add_nbsp: false,
 }, hexo.config.unified);
 
 const engine = unified()
-	.use(markdown, { gfm: true, commonmark: false, pedantic: false })
+	.use(markdown, {
+		gfm: config.gfm,
+		commonmark: config.commonmark,
+		pedantic: config.pedantic,
+		footnotes: config.footnotes,
+	})
 	.use(remarkHexoMore);
 
 if(config.math) engine.use(remarkMath);
