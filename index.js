@@ -10,6 +10,7 @@ const remark2rehype = require("remark-rehype");
 const highlight = require("rehype-highlight");
 const rehypeMath = require("rehype-katex");
 const rehypeLineNumbers = require("./utils/rehype-line-numbers");
+const rehypeNbsp = require("./utils/rehype-add-nbsp");
 const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
 
@@ -42,6 +43,8 @@ if(config.math) engine.use(rehypeMath);
 if(config.code && config.code_ln) engine.use(rehypeLineNumbers);
 
 if(config.code) engine.use(highlight, { ignoreMissing: true });
+
+if(config.add_nbsp) engine.use(rehypeNbsp);
 	
 engine.use(htmlFormat)
 	.use(html);
