@@ -1,6 +1,6 @@
 /* global hexo */
 
-'use strict';
+"use strict";
 
 const unified = require("unified");
 const markdown = require("remark-parse");
@@ -10,9 +10,9 @@ const remark2rehype = require("remark-rehype");
 const highlight = require("rehype-highlight");
 const rehypeMath = require("rehype-katex");
 const rehypeLineNumbers = require("./utils/rehype-line-numbers");
-const rehypeNbsp = require("./utils/rehype-add-nbsp");
 const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
+const hexoNbsp = require("./utils/hexo-add-nbsp");
 
 const config = Object.assign({
 	gfm: true,
@@ -44,8 +44,6 @@ if(config.code && config.code_ln) engine.use(rehypeLineNumbers);
 
 if(config.code) engine.use(highlight, { ignoreMissing: true });
 
-if(config.add_nbsp) engine.use(rehypeNbsp);
-	
 engine.use(htmlFormat)
 	.use(html);
 
@@ -71,6 +69,8 @@ if(typeof hexo !== "undefined") {
 	hexo.extend.renderer.register("mdwn", "html", renderer, true);
 	hexo.extend.renderer.register("mdtxt", "html", renderer, true);
 	hexo.extend.renderer.register("mdtext", "html", renderer, true);
+
+	if(config.add_nbsp) hexoNbsp(hexo);
 }
 
 module.exports = renderer;

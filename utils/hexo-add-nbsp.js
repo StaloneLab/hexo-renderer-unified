@@ -1,5 +1,3 @@
-const visit = require("unist-util-visit");
-
 const CHAR_LIST = [
 	":",
 	";",
@@ -8,22 +6,15 @@ const CHAR_LIST = [
 ];
 
 const SPACE = "\\s";
-const NBSP = "\u00A0";
+const NBSP = "&nbsp;";
 
-module.exports = function() {
+module.exports = function(hexo) {
 	const regex = regexFactory(CHAR_LIST);
 
-	function transformer(tree) {
-		visit(tree, "text", visitor);
-	}
-
-	function visitor(node, index, parent) {
-		if(node.type !== "text") return;
-
-		node.value = node.value.replace(regex, (v) => {
-			return NBSP + v[1];
-		});
-	}
+	hexo.extend.filter.register("after_post_render", (data) => {
+		data.content = data.content.replace(regex, (v) => NBSP + v[1]);
+		return data;
+	});
 
 	function regexFactory(list) {
 		let regexStr = SPACE + "(";
@@ -37,6 +28,4 @@ module.exports = function() {
 
 		return regex;
 	}
-
-	return transformer;
 };
