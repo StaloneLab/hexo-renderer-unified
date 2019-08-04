@@ -1,6 +1,6 @@
 {
   "name": "hexo-renderer-unified",
-  "version": "0.5.1",
+  "version": "1.0.0",
   "description": "Markdown renderer plugin for Hexo - based on Unified",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "unified",
     "renderer"
   ],
-  "author": "TAlone <titi_alone@gmx.fr>",
+  "author": "TAlone <talone@boxph.one>",
   "license": "LGPL-3.0-only",
   "bugs": {
     "url": "https://github.com/TitiAlone/hexo-renderer-unified/issues"
