@@ -7,27 +7,21 @@ const CHAR_LIST = [
 	"!",
 ];
 
-const SPACE = " ";
-const NBSP = "&nbsp;";
+const SPACE = "\\s";
+const NBSP = "\u00A0";
 
 module.exports = function() {
 	const regex = regexFactory(CHAR_LIST);
-	console.log(regex);
 
 	function transformer(tree) {
-		console.log(tree)
-		visit(tree, "element", visitor);
+		visit(tree, "text", visitor);
 	}
 
 	function visitor(node, index, parent) {
-		console.log("h");
 		if(node.type !== "text") return;
 
-		console.log(node);
-
-		node.value.replace(regex, (v) => {
-			console.log(v);
-			return NBSP + v;
+		node.value = node.value.replace(regex, (v) => {
+			return NBSP + v[1];
 		});
 	}
 
