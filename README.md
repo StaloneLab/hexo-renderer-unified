@@ -16,14 +16,14 @@ You can configure this plugin in `_config.yml`.
 
 ``` yaml
 unified:
-	gfm: true
-	pedantic: false
-    commonmark: false
-    footnotes: true
-	math: false
-	code: false
-	code_ln: false
-	add_nbsp: false
+  gfm: true
+  pedantic: false
+  commonmark: false
+  footnotes: true
+  math: false
+  code: false
+  code_ln: false
+  add_nbsp: false
 ```
 
 - **gfm** - Enable [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown)
