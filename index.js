@@ -14,6 +14,9 @@ const htmlFormat = require("rehype-format");
 const html = require("rehype-stringify");
 const hexoNbsp = require("./utils/hexo-add-nbsp");
 
+const createWrapper = require("./utils/create-wrapper");
+const visit = require("unist-util-visit");
+
 const config = Object.assign({
 	gfm: true,
 	pedantic: false,
@@ -24,6 +27,12 @@ const config = Object.assign({
 	code_ln: false,
 	add_nbsp: false,
 }, hexo.config.unified);
+
+const wrappers = {
+	table: [
+		createWrapper("table", "div", ["table-wrapper"])
+	]
+};
 
 const engine = unified()
 	.use(markdown, {
@@ -45,6 +54,12 @@ if(config.code && config.code_ln) engine.use(rehypeLineNumbers);
 if(config.code) engine.use(highlight, { ignoreMissing: true });
 
 engine.use(htmlFormat)
+	.use(() => (tree) => {
+		Object.keys(wrappers).forEach(nodeName =>
+			wrappers[nodeName].forEach(wrapper => {
+				visit(tree, wrapper);
+			}))
+	})
 	.use(html);
 
 function renderer(data) {
