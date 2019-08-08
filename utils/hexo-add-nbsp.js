@@ -3,6 +3,8 @@ const CHAR_LIST = [
 	";",
 	"?",
 	"!",
+	"€",
+	"%"
 ];
 
 const SPACE = "\\s";
