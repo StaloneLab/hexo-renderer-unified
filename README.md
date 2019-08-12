@@ -2,7 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/hexo-renderer-unified.svg)](https://www.npmjs.com/package/hexo-renderer-unified)
 
-Markdown renderer plugin for Hexo - based on Unified
+Markdown renderer plugin for Hexo - based on [Unified](https://github.com/unifiedjs/unified)
 
 ## Installation
 
