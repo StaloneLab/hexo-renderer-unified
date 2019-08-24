@@ -26,6 +26,7 @@ const config = Object.assign({
 	code: false,
 	code_ln: false,
 	add_nbsp: false,
+	titles_inc: 0
 }, hexo.config.unified);
 
 const wrappers = {
@@ -40,6 +41,15 @@ const engine = unified()
 		commonmark: config.commonmark,
 		pedantic: config.pedantic,
 		footnotes: config.footnotes,
+	})
+	.use(() => (tree) => {
+		visit(tree, "heading", (node) => {
+			node.depth += config.titles_inc;
+
+			if(node.depth > 6) {
+				node.depth = 6;
+			}
+		});
 	})
 	.use(remarkHexoMore);
 

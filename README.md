@@ -24,6 +24,7 @@ unified:
   code: false
   code_ln: false
   add_nbsp: false
+  titles_inc: 0
 ```
 
 - **gfm** - Enable [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown)
@@ -34,6 +35,7 @@ unified:
 - **code** - Enable code highlighting. *Please disable code highlighting in Hexo if you want this package to highlight code.*
 - **code_ln** - Add line numbering in front of highlighted code.
 - **add_nbsp** - Replace spaces with non-breaking spaces where necessary.
+- **titles_inc** - Shift all headers by a factor. Mainly intended for SEO.
 
 ## Extras
 
