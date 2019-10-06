@@ -1,6 +1,6 @@
 {
   "name": "hexo-renderer-unified",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Markdown renderer plugin for Hexo - based on Unified",
   "main": "index.js",
   "scripts": {

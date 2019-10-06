@@ -4,7 +4,7 @@
 
 const unified = require("unified");
 const markdown = require("remark-parse");
-const remarkHexoMore = require("./utils/rehype-hexo-more");
+const remarkHtmlComments = require("./utils/remark-html-comments");
 const remarkMath = require("remark-math");
 const remark2rehype = require("remark-rehype");
 const highlight = require("rehype-highlight");
@@ -51,11 +51,18 @@ const engine = unified()
 			}
 		});
 	})
-	.use(remarkHexoMore);
+	.use(remarkHtmlComments);
 
 if(config.math) engine.use(remarkMath);
 
-engine.use(remark2rehype, { allowDangerousHTML: true, handlers: { excerptDelimitor: remark2rehypeHexoMoreHandler } });
+engine.use(remark2rehype, { allowDangerousHTML: true, handlers: {
+	comments: function(_, node) {
+		return {
+			type: "comment",
+			value: node.value
+		}
+	}
+}});
 
 if(config.math) engine.use(rehypeMath);
 
@@ -74,16 +81,6 @@ engine.use(htmlFormat)
 
 function renderer(data) {
 	return String(engine.processSync(data.text));
-}
-
-function remark2rehypeHexoMoreHandler(h, node) {
-	const newNode = h(node);
-	newNode.type = "comment";
-	newNode.value = "more";
-
-	delete newNode.tagName;
-
-	return newNode;
 }
 
 if(typeof hexo !== "undefined") {
