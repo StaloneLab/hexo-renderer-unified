@@ -37,6 +37,6 @@ unified:
 - **add_nbsp** - Replace spaces with non-breaking spaces where necessary.
 - **titles_inc** - Shift all headers by a factor. Mainly intended for SEO.
 
-## Extras
+## Update note
 
-This plugins adds a simple syntax `<+++>` to separate abstract from content if you want to generate and RSS feed. If you don't need it, just don't use it.
+In it's first version, this plugin added a simple syntax `<+++>` to separate abstract from content if you wanted to generate and RSS feed; this syntax **does not exist** anymore from version 2. Please check your articles before updating; the new syntax is the hexo recommended one: `<!--more-->`.
